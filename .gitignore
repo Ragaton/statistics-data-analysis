@@ -1,0 +1,5 @@
+*.pdf
+*-note-render.png
+.note-preview/
+data/
+.env

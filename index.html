@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142921">
+  <title>Statistics &amp; Data Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="statistics.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <h1>Statistics <span>&amp; Data Analysis</span></h1>
+    </div>
+  </header>
+  <main class="container">
+    <nav class="calculator-nav" aria-label="Calculators">
+      <button type="button" data-view="descriptive" aria-pressed="true" aria-controls="descriptive">Descriptive statistics</button>
+      <button type="button" data-view="binomial" aria-pressed="false" aria-controls="binomial">Binomial probability</button>
+      <button type="button" data-view="regression" aria-pressed="false" aria-controls="regression">Linear regression</button>
+    </nav>
+    <section id="descriptive" aria-labelledby="descriptive-title">
+      <div class="section-heading">
+        <h2 id="descriptive-title">Descriptive statistics</h2>
+        <p>Summarize a numeric column from Excel.</p>
+      </div>
+      <div class="calculator">
+        <form class="card" novalidate>
+          <div class="card-heading"><h3>Observations</h3><button type="button" class="example">Load example</button></div>
+          <label for="observations" class="sr-only">Observations</label>
+          <textarea id="observations" name="values" rows="9" spellcheck="false" aria-describedby="observation-hint"></textarea>
+          <p class="hint" id="observation-hint">Separate values with newlines, spaces, or semicolons. Omit headers and thousands separators.</p>
+          <label>Quartile method
+            <select name="quartiles">
+              <option value="inc">Excel inclusive (QUARTILE.INC)</option>
+              <option value="halves">Median of halves (exclude overall median)</option>
+            </select>
+          </label>
+          <label>Decimal format
+            <select name="decimal"><option value=".">Point (3.14)</option><option value=",">Comma (3,14)</option></select>
+          </label>
+          <button class="calculate" type="submit">Calculate statistics</button>
+        </form>
+        <div class="card results">
+          <div class="card-heading"><h3>Results</h3><output class="status" aria-live="polite"></output></div>
+          <div class="result-content"></div>
+        </div>
+      </div>
+    </section>
+    <section id="binomial" aria-labelledby="binomial-title" hidden>
+      <div class="section-heading">
+        <h2 id="binomial-title">Binomial probability</h2>
+        <p>Calculate the chance of a success count across independent trials with the same probability of success.</p>
+      </div>
+      <div class="calculator">
+        <form class="card" novalidate>
+          <div class="card-heading"><h3>Trial setup</h3><button type="button" class="example">Load example</button></div>
+          <label>Number of trials (n)<input name="trials" inputmode="numeric" type="text"></label>
+          <label>Probability of success (p)<input name="probability" inputmode="decimal" type="text" placeholder="0.5"></label>
+          <label>Event
+            <select name="event">
+              <option value="exact">Exactly k</option>
+              <option value="atMost">At most k (≤ k)</option>
+              <option value="less">Fewer than k (&lt; k)</option>
+              <option value="atLeast">At least k (≥ k)</option>
+              <option value="greater">More than k (&gt; k)</option>
+              <option value="between">Between k and m (inclusive)</option>
+            </select>
+          </label>
+          <div class="input-row">
+            <label>Success count (k)<input name="successes" inputmode="numeric" type="text"></label>
+            <label id="upper-label" hidden>Upper count (m)<input name="upper" inputmode="numeric" type="text"></label>
+          </div>
+          <label>Decimal format
+            <select name="decimal"><option value=".">Point (0.5)</option><option value=",">Comma (0,5)</option></select>
+          </label>
+          <button class="calculate" type="submit">Calculate probability</button>
+        </form>
+        <div class="card results">
+          <div class="card-heading"><h3>Results</h3><output class="status" aria-live="polite"></output></div>
+          <div class="result-content"></div>
+        </div>
+      </div>
+    </section>
+    <section id="regression" aria-labelledby="regression-title" hidden>
+      <div class="section-heading">
+        <h2 id="regression-title">Simple linear regression</h2>
+        <p>Fit a straight line to paired observations and estimate Y for a given X.</p>
+      </div>
+      <div class="calculator">
+        <form class="card" novalidate>
+          <div class="card-heading"><h3>Paired observations</h3><button type="button" class="example">Load example</button></div>
+          <label for="pairs" class="sr-only">X and Y pairs</label>
+          <textarea id="pairs" name="pairs" rows="7" spellcheck="false" aria-describedby="pair-hint"></textarea>
+          <p id="pair-hint" class="hint">Paste two adjacent Excel columns, X first and Y second. Use one complete pair per row and omit headers.</p>
+          <label>Predict Y at this X <span class="optional">(optional)</span><input name="prediction" type="text" inputmode="decimal"></label>
+          <label>Decimal format
+            <select name="decimal"><option value=".">Point (3.14)</option><option value=",">Comma (3,14)</option></select>
+          </label>
+          <button class="calculate" type="submit">Fit regression line</button>
+        </form>
+        <div class="card results">
+          <div class="card-heading"><h3>Results</h3><output class="status" aria-live="polite"></output></div>
+          <div class="result-content"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
